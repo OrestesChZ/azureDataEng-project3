@@ -1,0 +1,9 @@
+{
+	"name": "advenwork-datafactory",
+	"location": "brazilsouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "fc75c99a-f9f4-43ea-ae32-2ac82140938f",
+		"tenantId": "9da36bbb-7597-4d9d-b5a8-777e703fe193"
+	}
+}
