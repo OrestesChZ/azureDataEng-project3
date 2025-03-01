@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"p_sinkf_older": {
+			"p_sink_folder": {
 				"type": "String"
 			},
 			"p_file_name": {
@@ -23,7 +23,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@dataset().p_sinkf_older",
+					"value": "@dataset().p_sink_folder",
 					"type": "Expression"
 				},
 				"fileSystem": "bronze"
