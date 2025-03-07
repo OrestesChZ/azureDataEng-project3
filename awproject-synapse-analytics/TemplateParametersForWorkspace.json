@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "awproject-synapse-analytics"
+		},
+		"awproject-synapse-analytics-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:awproject-synapse-analytics.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"storagedatalake_accountKey": {
+			"value": ""
+		},
+		"awproject-synapse-analytics-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://awsynapsestorage.dfs.core.windows.net"
+		},
+		"httpLinkedService_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com"
+		},
+		"storagedatalake_properties_typeProperties_url": {
+			"value": "https://advenworkdatalake.dfs.core.windows.net/"
+		}
+	}
+}
