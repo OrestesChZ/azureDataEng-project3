@@ -1,0 +1,17 @@
+{
+	"name": "create Views Gold",
+	"properties": {
+		"content": {
+			"query": "CREATE VIEW gold.calendar\nAS \nSELECT\n     *\nFROM \n    OPENROWSET (\n        BULK  'https://advenworkdatalake.blob.core.windows.net/silver/AdventureWorks_Calendar/',\n        FORMAT = 'PARQUET'\n    ) AS query1\n\n----------------\n\nCREATE VIEW gold.customers\nAS \nSELECT\n     *\nFROM \n    OPENROWSET (\n        BULK  'https://advenworkdatalake.blob.core.windows.net/silver/AdventureWorks_Customers/',\n        FORMAT = 'PARQUET'\n    ) AS query1\n\n----------------\n\nCREATE VIEW gold.product_subcategories\nAS \nSELECT\n     *\nFROM \n    OPENROWSET (\n        BULK  'https://advenworkdatalake.blob.core.windows.net/silver/AdventureWorks_Product_SubCategories/',\n        FORMAT = 'PARQUET'\n    ) AS query1\n\n\n---------------------\n\nCREATE VIEW gold.products\nAS \nSELECT\n     *\nFROM \n    OPENROWSET (\n        BULK  'https://advenworkdatalake.blob.core.windows.net/silver/AdventureWorks_Products/',\n        FORMAT = 'PARQUET'\n    ) AS query1\n\n\n-----------------------\n\nCREATE VIEW gold.returns\nAS \nSELECT\n     *\nFROM \n    OPENROWSET (\n        BULK  'https://advenworkdatalake.blob.core.windows.net/silver/AdventureWorks_Returns/',\n        FORMAT = 'PARQUET'\n    ) AS query1\n\n\n---------------------\n\nCREATE VIEW gold.sales\nAS \nSELECT\n     *\nFROM \n    OPENROWSET (\n        BULK  'https://advenworkdatalake.blob.core.windows.net/silver/AdventureWorks_Sales/',\n        FORMAT = 'PARQUET'\n    ) AS query1\n---------------------\n\nCREATE VIEW gold.territories\nAS \nSELECT\n     *\nFROM \n    OPENROWSET (\n        BULK  'https://advenworkdatalake.blob.core.windows.net/silver/AdventureWorks_Territories/',\n        FORMAT = 'PARQUET'\n    ) AS query1\n\n\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "awdatabase",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
