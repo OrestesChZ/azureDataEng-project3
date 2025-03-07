@@ -530,6 +530,26 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 1')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "CREATE DATABASE SCOPED CREDENTIAL cred_orestes\nWITH\n    IDENTITY = 'Managed Identity';\n\nCREATE EXTERNAL DATA SOURCE source_silver\nWITH (\n    LOCATION = 'https://advenworkdatalake.blob.core.windows.net/silver',\n    CREDENTIAL = cred_orestes\n);\n\nCREATE EXTERNAL DATA SOURCE source_gold\nWITH (\n    LOCATION = 'https://advenworkdatalake.blob.core.windows.net/gold',\n    CREDENTIAL = cred_orestes\n);\n\n----------------------------------------------------------------------\n----------------------------------------------------------------------\n\nCREATE EXTERNAL FILE FORMAT format_parquet\nWITH(\n    FORMAT_TYPE = PARQUET,\n    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'\n)\n\n---------------\n\n--CREATE EXTERNAL TABLE EXTSALES\n\nCREATE EXTERNAL TABLE gold.extsales\nWITH (\n    LOCATION = 'extsales',\n    DATA_SOURCE = source_gold,\n    FILE_FORMAT = format_parquet\n)\nAS\nSELECT * FROM gold.sales\n\n\nSELECT * from gold.extsales \n\n\n\n\n\n\n",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "awdatabase",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/create Schema')]",
 			"type": "Microsoft.Synapse/workspaces/sqlscripts",
 			"apiVersion": "2019-06-01-preview",
@@ -556,6 +576,26 @@
 			"properties": {
 				"content": {
 					"query": "CREATE VIEW gold.calendar\nAS \nSELECT\n     *\nFROM \n    OPENROWSET (\n        BULK  'https://advenworkdatalake.blob.core.windows.net/silver/AdventureWorks_Calendar/',\n        FORMAT = 'PARQUET'\n    ) AS query1\n\n----------------\n\nCREATE VIEW gold.customers\nAS \nSELECT\n     *\nFROM \n    OPENROWSET (\n        BULK  'https://advenworkdatalake.blob.core.windows.net/silver/AdventureWorks_Customers/',\n        FORMAT = 'PARQUET'\n    ) AS query1\n\n----------------\n\nCREATE VIEW gold.product_subcategories\nAS \nSELECT\n     *\nFROM \n    OPENROWSET (\n        BULK  'https://advenworkdatalake.blob.core.windows.net/silver/AdventureWorks_Product_SubCategories/',\n        FORMAT = 'PARQUET'\n    ) AS query1\n\n\n---------------------\n\nCREATE VIEW gold.products\nAS \nSELECT\n     *\nFROM \n    OPENROWSET (\n        BULK  'https://advenworkdatalake.blob.core.windows.net/silver/AdventureWorks_Products/',\n        FORMAT = 'PARQUET'\n    ) AS query1\n\n\n-----------------------\n\nCREATE VIEW gold.returns\nAS \nSELECT\n     *\nFROM \n    OPENROWSET (\n        BULK  'https://advenworkdatalake.blob.core.windows.net/silver/AdventureWorks_Returns/',\n        FORMAT = 'PARQUET'\n    ) AS query1\n\n\n---------------------\n\nCREATE VIEW gold.sales\nAS \nSELECT\n     *\nFROM \n    OPENROWSET (\n        BULK  'https://advenworkdatalake.blob.core.windows.net/silver/AdventureWorks_Sales/',\n        FORMAT = 'PARQUET'\n    ) AS query1\n---------------------\n\nCREATE VIEW gold.territories\nAS \nSELECT\n     *\nFROM \n    OPENROWSET (\n        BULK  'https://advenworkdatalake.blob.core.windows.net/silver/AdventureWorks_Territories/',\n        FORMAT = 'PARQUET'\n    ) AS query1\n\n\n\n",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "awdatabase",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/externalTables')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "CREATE MASTER KEY ENCRYPTION BY PASSWORD ='Ores20tes00@' ;",
 					"metadata": {
 						"language": "sql"
 					},
